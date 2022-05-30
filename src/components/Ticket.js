@@ -2,28 +2,23 @@ import React from "react";
 import { Draggable } from "react-beautiful-dnd";
 
 const Ticket = ({ taskList }) => {
-  const ToDos = taskList.map((todo) => (
-    <Draggable draggableId={todo.ticketID} index={todo.index}>
+  const ToDos = taskList.map((todo, index) => (
+    <Draggable key={todo.ticketID} draggableId={todo.ticketID} index={index}>
       {(provided) => (
         <div
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          className="ticket mt-4 bg-slate-200 flex flex-col  shadow-md"
+          className="border-l-4 border-sky-400 ticket mt-4 bg-slate-200 flex flex-col  shadow-md"
         >
-          <div className="top flex justify-between text-slate-600 employee">
-            <span className="bg-teal-900  text-white p-2 ">
-              {todo.medewerker}
-            </span>
-            <span className="status flex items-center">{todo.status}</span>
-            <div className="text-xs flex items-center extra-info pr-2">
-              <span>{todo.ticketID}</span>
-              <span>{todo.gsr}</span>
-            </div>
+          <div className="p-2 align-start text-left font-bold text-sm middle bg-gray-50">
+            {todo.naam}
           </div>
-          <div className="p-2 flex middle bg-gray-50">{todo.naam}</div>
           <div className="p-2 flex bottom text-xs bg-gray-50">
-            <span className="company">{todo.company}</span>
+            <span className="company">
+              {todo.medewerker} - {todo.company}
+            </span>
+            <span className="ml-auto">{todo.GSR}</span>
           </div>
           {provided.placeholder}
         </div>
