@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  background-color: #cccccc;
+  @apply bg-gray-200;
 }
 
 .App {
@@ -43,4 +43,17 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.icon {
+  @apply rounded-md;
+  @apply bg-red-500;
+  @apply w-3;
+  @apply h-3;
+  @apply inline-block;
+  @apply mr-1;
+}
+
+.Task {
+  @apply bg-blue-800;
 }

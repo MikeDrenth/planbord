@@ -13,12 +13,11 @@ const Ticket = ({ taskList }) => {
           className="border-l-4 border-sky-400 ticket mt-4 bg-slate-200 flex flex-col  shadow-md"
         >
           <div className="p-2 align-start text-left font-bold text-sm middle bg-gray-50">
+            <span className={`icon ${todo.type}`}></span>
             {todo.naam}
           </div>
           <div className="p-2 flex bottom text-xs bg-gray-50">
-            <span className="company">
-              <div className={todo.type.toLowerCase()}></div> {todo.company}
-            </span>
+            <span className="company">{todo.company}</span>
             <span className="ml-auto">{todo.GSR}</span>
           </div>
           {provided.placeholder}
