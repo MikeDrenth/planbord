@@ -4,10 +4,11 @@ import { Draggable } from "react-beautiful-dnd";
 const Ticket = ({ taskList }) => {
   const ToDos = taskList.map((todo, index) => (
     <Draggable key={todo.ticketID} draggableId={todo.ticketID} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          isDragging={snapshot.isDragging}
           ref={provided.innerRef}
           className="border-l-4 border-sky-400 ticket mt-4 bg-slate-200 flex flex-col  shadow-md"
         >
@@ -16,7 +17,7 @@ const Ticket = ({ taskList }) => {
           </div>
           <div className="p-2 flex bottom text-xs bg-gray-50">
             <span className="company">
-              {todo.medewerker} - {todo.company}
+              <div className={todo.type.toLowerCase()}></div> {todo.company}
             </span>
             <span className="ml-auto">{todo.GSR}</span>
           </div>

@@ -14,6 +14,7 @@ const gepland = [
     GSR: "20G, 11R, 9S",
     naam: "Kapshoeven ombouwen Saas",
     company: "Strandcamping Groede",
+    type: "Task",
   },
   {
     medewerker: "FG",
@@ -22,6 +23,7 @@ const gepland = [
     GSR: "2G, 1R, 1S",
     naam: "Kapshoeven ombouwen Saas",
     company: "'n Kaps",
+    type: "Task",
   },
   {
     medewerker: "MD",
@@ -30,6 +32,7 @@ const gepland = [
     GSR: "1G, 2R, 3S",
     naam: "Westerbergen Boekstraat",
     company: "Westerbergen",
+    type: "Bug",
   },
 ];
 
@@ -41,6 +44,7 @@ const uitvoering = [
     GSR: "10G, 3R, 2S",
     naam: "EveryOffice - Template bouwen",
     company: "EveryOffice",
+    type: "Task",
   },
   {
     medewerker: "FG",
@@ -49,6 +53,7 @@ const uitvoering = [
     GSR: "2G, 1R, 1S",
     naam: "Toevoegen Captcha Wesbite",
     company: "AKG ICT",
+    type: "Task",
   },
 ];
 
@@ -60,6 +65,7 @@ const testing = [
     GSR: "2G, 1R, 22S",
     naam: "SaaS Compiler update",
     company: "EveryOffice",
+    type: "Bug",
   },
   {
     medewerker: "FG",
@@ -68,6 +74,7 @@ const testing = [
     GSR: "21G, 11R, 9S",
     naam: "Westerbegen Boekstraat SaaS",
     company: "Eiland van Maurik",
+    type: "Bug",
   },
   {
     medewerker: "MD",
@@ -76,6 +83,7 @@ const testing = [
     GSR: "4G, 4R, 4S",
     naam: "Westerbegen Boekstraat SaaS",
     company: "Westerbegen",
+    type: "Task",
   },
 ];
 
@@ -103,24 +111,33 @@ const App = () => {
 
     let newPlanned = plannedList;
     let newDoing = doingTasks;
+    let newTesting = testingTasks;
     let addedTask;
 
+    // Remove task from current object
     if (source.droppableId === "TaskGepland") {
       addedTask = newPlanned[source.index];
       newPlanned.splice(source.index, 1);
-    } else {
+    } else if (source.droppableId === "TaskDoing") {
       addedTask = newDoing[source.index];
       newDoing.splice(source.index, 1);
+    } else if (source.droppableId === "TaskTesting") {
+      addedTask = newTesting[source.index];
+      newTesting.splice(source.index, 1);
     }
 
+    // Add task to new object
     if (destination.droppableId === "TaskGepland") {
       newPlanned.splice(destination.index, 0, addedTask);
-    } else {
+    } else if (destination.droppableId === "TaskDoing") {
       newDoing.splice(destination.index, 0, addedTask);
+    } else if (destination.droppableId === "TaskTesting") {
+      newTesting.splice(destination.index, 0, addedTask);
     }
 
     setPlannedList(newPlanned);
     setDoingTasks(newDoing);
+    setTestingTasks(newTesting);
 
     return;
   };
@@ -132,7 +149,7 @@ const App = () => {
           <Droppable droppableId="TaskGepland">
             {(provided) => (
               <div
-                className="p-2 min-h-full"
+                className="p-2"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
@@ -155,7 +172,7 @@ const App = () => {
               </div>
             )}
           </Droppable>
-          <Droppable droppableId="TaskDoing">
+          <Droppable droppableId="TaskTesting">
             {(provided) => (
               <div
                 className="p-2"
